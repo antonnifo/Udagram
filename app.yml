@@ -7,29 +7,29 @@ Parameters:
     Type: String
 
   VpcCIDR:
-    Description: Please enter the IP range (CIDR notation) for this VPC
+    Description: IP range (CIDR notation) for this VPC
     Type: String
-    Default: 10.0.0.0/16
+    
 
   PublicSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+    Description: IP range (CIDR notation) for the public subnet in the first Availability Zone
     Type: String
-    Default: 10.0.0.0/24
+    
 
   PublicSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+    Description: IP range (CIDR notation) for the public subnet in the second Availability Zone
     Type: String
-    Default: 10.0.1.0/24
+    
 
   PrivateSubnet1CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+    Description: IP range (CIDR notation) for the private subnet in the first Availability Zone
     Type: String
-    Default: 10.0.2.0/24
+    
 
   PrivateSubnet2CIDR:
-    Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
+    Description: IP range (CIDR notation) for the private subnet in the second Availability Zone
     Type: String
-    Default: 10.0.3.0/24
+   
 
   AutoScalingGroupMinSize:
     Type: String
@@ -243,8 +243,10 @@ Resources:
           !Sub "${EnvironmentName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
-        FromPort: 8080
-        ToPort: 8080
+        # FromPort: 8080
+        FromPort: 80
+        # ToPort: 8080
+        ToPort: 80
         CidrIp: 0.0.0.0/0
       - IpProtocol: tcp
         FromPort: 22
@@ -330,7 +332,8 @@ Resources:
       HealthCheckProtocol: "HTTP"
       HealthCheckTimeoutSeconds: 8
       HealthyThresholdCount: 2
-      Port: 8080
+      # Port: 8080
+      Port: 80
       Protocol: "HTTP"
       UnhealthyThresholdCount: 5
       VpcId: 
